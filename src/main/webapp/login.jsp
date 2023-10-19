@@ -31,13 +31,14 @@
 
                 <div class="signin-form">
                     <h2 class="form-title">Sign in</h2>
-                    <form method="" action="initial-servlet" class="register-form"
+                    <form method="post" action="loginServlet" class="register-form"
                           id="login-form">
                         <div class="form-group">
                             <label for="username"><i
-                                    class="zmdi zmdi-account material-icons-name"></i></label> <input
+                                    class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input
                                 type="text" name="username" id="username"
-                                placeholder="Your Name" />
+                                placeholder="Your user name" />
                         </div>
                         <div class="form-group">
                             <label for="password"><i class="zmdi zmdi-lock"></i></label> <input

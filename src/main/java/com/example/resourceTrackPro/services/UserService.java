@@ -35,8 +35,17 @@ public class UserService {
 
     public boolean validLoginDetails(User user) {
         System.out.println("Validating user: " + user);
-//        return true;
+//      return true;
         return userRepositoryImpl.findByUsername(user.getUsername()).isEmpty()
                 && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+    }
+
+    public boolean login(String username,String password) {
+        System.out.println("Logging in user: " + username);
+        Optional<User> byUsername = userRepositoryImpl.findByUsername(username);
+        if (byUsername.isPresent() && byUsername.get().getPassword().equals(password)) {
+            return true;
+        }
+        return false;
     }
 }
