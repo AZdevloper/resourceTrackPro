@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "singupServlet", value = "/singupServlet")
-public class SingupServlet extends HttpServlet {
+@WebServlet(name = "GetEquipment", value = "/GetEquipment")
+public class GetEquipment extends HttpServlet {
 
     private UserService userService;
 
@@ -32,40 +32,35 @@ public class SingupServlet extends HttpServlet {
         userService = new UserService();
     }
 
-    public SingupServlet() {
+    public GetEquipment() {
 
     }
 
-    public SingupServlet(UserService  userService) {
+    public GetEquipment(UserService  userService) {
         this.userService = userService;
     }
 
 
     @Override
-    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doGet");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("singup.jsp");
-        dispatcher.forward(request, response);
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String selectedCar = request.getParameter("selectedCar");
+        System.out.println(selectedCar);
 
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
+      /*  String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String ConfirmPassword = request.getParameter("rePassword");
-        User user = new User();
+        *//*User user = new User();
         user.setEmail(email);
         user.setUsername(username);
-        user.setPassword(password);
-        if(userService.validLoginDetails(user) && password.equals(ConfirmPassword)) {
-            userService.register(user);
-            response.sendRedirect("login.jsp");
+        user.setPassword(password);*//*
+        if(userService.login(username,password) ) {
+            System.out.println("passed");
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            response.sendRedirect("view/dashboard.jsp");
         } else {
+            System.out.println("else");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//          response.sendRedirect("r.r");
-        }
+            response.sendRedirect("login.jsb");
+        }*/
+
     }
 }

@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
         if(userService.login(username,password) ) {
             System.out.println("passed");
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
-            response.sendRedirect("viwie/dashboard.jsp");
+            response.sendRedirect("view/dashboard.jsp");
         } else {
             System.out.println("else");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
