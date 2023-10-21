@@ -7,16 +7,19 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "helloServlet", value = "/createDatabaseAndEntities")
-public class CreateEntitiesServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
     private String message;
 
     public void init() {
-        EntityManagerFactory emf = jakarta.persistence.Persistence.createEntityManagerFactory("default");
-        message = "your entities created successfully ";
+        message = "Hello World!";
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        EntityManagerFactory emf = jakarta.persistence.Persistence.createEntityManagerFactory("default");
 
         response.setContentType("text/html");
+
+        // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");

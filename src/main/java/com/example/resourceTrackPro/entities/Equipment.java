@@ -4,7 +4,7 @@ package com.example.resourceTrackPro.entities;
 import jakarta.persistence.*;
 //import lombok.NoArgsConstructor;
 
-@Entity
+//@Entity
 @Table(name = "Equipments")
 //@NoArgsConstructor
 @Access(AccessType.FIELD)

@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "User")
 @Access(AccessType.FIELD) //
 //@NoArgsConstructor
 public class User {
@@ -28,13 +28,15 @@ public class User {
     private String email;
 
     @Column(name = "password")
+
     private String password;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+   /* @Enumerated(EnumType.STRING) // Specify that the role is an Enum and store it as a String
+//    @Column(name = "role")
+    private Role role;*/
 
     public User() {
+
     }
     public User(String username, String email, String password, Role role){
         this.username = username;

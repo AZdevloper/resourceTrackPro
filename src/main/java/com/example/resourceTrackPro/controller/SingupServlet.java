@@ -65,7 +65,7 @@ public class SingupServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
         } else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//          response.sendRedirect("r.r");
+//            response.sendRedirect("r.r");
         }
     }
 }

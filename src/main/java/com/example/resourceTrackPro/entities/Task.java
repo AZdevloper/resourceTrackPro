@@ -3,12 +3,10 @@ package com.example.resourceTrackPro.entities;
 //import ;
 import jakarta.persistence.*;
 
-//import javax.persistence.TemporalType;
 import java.sql.Date;
-//import java.time.temporal.Temporal;
 
 //@Entity
-@Table(name = "Tasks")
+@Table(name = "Task")
 @Access(AccessType.FIELD) //
 public class Task {
 
@@ -20,7 +18,6 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DeadLine")
     private Date DeadLine;
 
@@ -33,17 +30,5 @@ public class Task {
 
     @Column(name = "status")
     private Status status;
-
-    public Task() {
-
-    }
-
-    public Task(String description, Date DeadLine, Priority priority, Employee employeeAssigner, Status status) {
-        this.description = description;
-        this.DeadLine = DeadLine;
-        this.priority = priority;
-        this.employeeAssigner = employeeAssigner;
-        this.status = status;
-    }
 
 }
