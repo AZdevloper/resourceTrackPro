@@ -9,11 +9,7 @@ import jakarta.persistence.Persistence;
 import java.util.Optional;
 
 public class UserRepositoryImpl implements  UserRepositoryInterface {
-
-
-
     static private EntityManager em ;
-
     public UserRepositoryImpl( EntityManager em) {
         this.em = em;
     }
@@ -38,9 +34,18 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
         return user;
     }
     public Optional<User> findByUsername(String username) {
-        System.out.println("Getting user by username: " + username);
-        return em.createQuery("select u from User u where u.username = :username", User.class)
-                .setParameter("username", username)
+        System.out.println("Getting user by username: " + "abdelaziz");
+       /* System.out.println("return in entity manager " + em.createQuery("select u from User u where u.id = :username", User.class)
+                .setParameter("username", 1)
+                .getResultStream().findAny());*/
+
+         return em.createQuery("select u from User u where u.username = :username", User.class)
+                 .setParameter("username", username)
+                 .getResultStream().findAny();
+    }
+    public Optional<User> findById(String userId) {
+        return em.createQuery("select u from User u where u.id = :userId", User.class)
+                .setParameter("userId", userId)
                 .getResultStream().findAny();
     }
 
@@ -48,5 +53,4 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         em = entityManagerFactory.createEntityManager();
     }
-
 }

@@ -1,291 +1,254 @@
-<%--<%
-    if (session.getAttribute("name") == null){
-        response.sendRedirect("login.jsp");
-    }
-%>--%>
+
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
-<html lang="en" dir="ltr">
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="assets/style.css">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Website Homepage HTML and CSS | CodingNepal</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Importing Google font - Open Sans */
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .navbar .logo a {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar .links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .navbar .links a {
+            font-weight: 500;
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 0;
+            transition: 0.2s ease;
+        }
+
+        .navbar .links a:hover {
+            color: #47b2e4;
+        }
+
+        .navbar .buttons a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            padding: 15px 0;
+            transition: 0.2s ease;
+        }
+
+        .navbar .buttons a:not(:last-child) {
+            margin-right: 30px;
+        }
+
+        .navbar .buttons .signin:hover {
+            color: #47b2e4;
+        }
+
+        .navbar .buttons .signup {
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            border-radius: 0.375rem;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .navbar .buttons .signup:hover {
+            background-color: #47b2e4;
+            color: #fff;
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 95vh;
+            padding: 0 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section .hero {
+            max-width: 50%;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #c9c7c7;
+        }
+
+        .hero-section .img img {
+            width: 517px;
+        }
+
+        .hero-section .buttons {
+            margin-top: 40px;
+        }
+
+        .hero-section .buttons a {
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: 0.2s ease;
+            display: inline-block;
+        }
+
+        .hero-section .buttons a:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        .buttons .join {
+            background-color: #47b2e4;
+        }
+
+        .hero-section .buttons .learn {
+            border: 1px solid #fff;
+            border-radius: 0.375rem;
+        }
+
+        .hero-section .buttons a:hover {
+            background-color: #47b2e4;
+        }
+
+        /* Hamburger menu styles */
+        #menu-toggle {
+            display: none;
+        }
+
+        #hamburger-btn {
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            order: 1;
+        }
+
+        @media screen and (max-width: 1023px) {
+            .navbar .logo a {
+                font-size: 1.5rem;
+            }
+
+            .links {
+                position: fixed;
+                left: -100%;
+                top: 75px;
+                width: 100%;
+                height: 100vh;
+                padding-top: 50px;
+                background: #175d69;
+                flex-direction: column;
+                transition: 0.3s ease;
+            }
+
+            .navbar #menu-toggle:checked ~ .links {
+                left: 0;
+            }
+
+            .navbar #hamburger-btn {
+                display: block;
+            }
+
+            .header .buttons {
+                display: none;
+            }
+
+            .hero-section .hero {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero-section img {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="sidebar">
-    <div class="logo-details">
-        <i class='bx bxl-c-plus-plus'></i>
-        <span class="logo_name">CodingLab</span>
-    </div>
-    <ul class="nav-links">
-        <li>
-            <a href="#" class="active">
-                <i class='bx bx-grid-alt' ></i>
-                <span class="links_name">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-box' ></i>
-                <span class="links_name">Product</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-list-ul' ></i>
-                <span class="links_name">Order list</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Analytics</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-coin-stack' ></i>
-                <span class="links_name">Stock</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-book-alt' ></i>
-                <span class="links_name">Total order</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Team</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-message' ></i>
-                <span class="links_name">Messages</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-heart' ></i>
-                <span class="links_name">Favrorites</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-cog' ></i>
-                <span class="links_name">Setting</span>
-            </a>
-        </li>
-        <li class="log_out">
-            <a href="#">
-                <i class='bx bx-log-out'></i>
-                <span class="links_name">Log out</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<section class="home-section">
-    <nav>
-        <div class="sidebar-button">
-            <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Dashboard</span>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-        </div>
-        <div class="profile-details">
-            <img src="images/profile.jpg" alt="">
-            <span class="admin_name">Prem Shahi</span>
-            <i class='bx bx-chevron-down' ></i>
+<header class="header">
+    <nav class="navbar">
+        <h2 class="logo"><a href="#">CodingNepal</a></h2>
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" id="hamburger-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </label>
+        <ul class="links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        <div class="buttons">
+            <a href="login.jsp" class="signin">Sign In</a>
+            <a href="singup.jsp" class="signup">Sign Up</a>
         </div>
     </nav>
-
-    <div class="home-content">
-        <div class="overview-boxes">
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Order</div>
-                    <div class="number">40,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
-                </div>
-                <i class='bx bx-cart-alt cart'></i>
-            </div>
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Sales</div>
-                    <div class="number">38,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
-                </div>
-                <i class='bx bxs-cart-add cart two' ></i>
-            </div>
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Profit</div>
-                    <div class="number">$12,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
-                </div>
-                <i class='bx bx-cart cart three' ></i>
-            </div>
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Return</div>
-                    <div class="number">11,086</div>
-                    <div class="indicator">
-                        <i class='bx bx-down-arrow-alt down'></i>
-                        <span class="text">Down From Today</span>
-                    </div>
-                </div>
-                <i class='bx bxs-cart-download cart four' ></i>
-            </div>
-        </div>
-
-        <div class="sales-boxes">
-            <div class="recent-sales box">
-                <div class="title">Recent Sales</div>
-                <div class="sales-details">
-                    <ul class="details">
-                        <li class="topic">Date</li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                        <li><a href="#">02 Jan 2021</a></li>
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Customer</li>
-                        <li><a href="#">Alex Doe</a></li>
-                        <li><a href="#">David Mart</a></li>
-                        <li><a href="#">Roe Parter</a></li>
-                        <li><a href="#">Diana Penty</a></li>
-                        <li><a href="#">Martin Paw</a></li>
-                        <li><a href="#">Doe Alex</a></li>
-                        <li><a href="#">Aiana Lexa</a></li>
-                        <li><a href="#">Rexel Mags</a></li>
-                        <li><a href="#">Tiana Loths</a></li>
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Sales</li>
-                        <li><a href="#">Delivered</a></li>
-                        <li><a href="#">Pending</a></li>
-                        <li><a href="#">Returned</a></li>
-                        <li><a href="#">Delivered</a></li>
-                        <li><a href="#">Pending</a></li>
-                        <li><a href="#">Returned</a></li>
-                        <li><a href="#">Delivered</a></li>
-                        <li><a href="#">Pending</a></li>
-                        <li><a href="#">Delivered</a></li>
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Total</li>
-                        <li><a href="#">$204.98</a></li>
-                        <li><a href="#">$24.55</a></li>
-                        <li><a href="#">$25.88</a></li>
-                        <li><a href="#">$170.66</a></li>
-                        <li><a href="#">$56.56</a></li>
-                        <li><a href="#">$44.95</a></li>
-                        <li><a href="#">$67.33</a></li>
-                        <li><a href="#">$23.53</a></li>
-                        <li><a href="#">$46.52</a></li>
-                    </ul>
-                </div>
-                <div class="button">
-                    <a href="#">See All</a>
-                </div>
-            </div>
-            <div class="top-sales box">
-                <div class="title">Top Seling Product</div>
-                <ul class="top-sales-details">
-                    <li>
-                        <a href="#">
-                            <img src="images/sunglasses.jpg" alt="">
-                            <span class="product">Vuitton Sunglasses</span>
-                        </a>
-                        <span class="price">$1107</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/jeans.jpg" alt="">
-                            <span class="product">Hourglass Jeans </span>
-                        </a>
-                        <span class="price">$1567</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/nike.jpg" alt="">
-                            <span class="product">Nike Sport Shoe</span>
-                        </a>
-                        <span class="price">$1234</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/scarves.jpg" alt="">
-                            <span class="product">Hermes Silk Scarves.</span>
-                        </a>
-                        <span class="price">$2312</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/blueBag.jpg" alt="">
-                            <span class="product">Succi Ladies Bag</span>
-                        </a>
-                        <span class="price">$1456</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/bag.jpg" alt="">
-                            <span class="product">Gucci Womens's Bags</span>
-                        </a>
-                        <span class="price">$2345</span>
-                    <li>
-                        <a href="#">
-                            <img src="images/addidas.jpg" alt="">
-                            <span class="product">Addidas Running Shoe</span>
-                        </a>
-                        <span class="price">$2345</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/shirt.jpg" alt="">
-                            <span class="product">Bilack Wear's Shirt</span>
-                        </a>
-                        <span class="price">$1245</span>
-                    </li>
-                </ul>
-            </div>
+</header>
+<section class="hero-section">
+    <div class="hero">
+        <h2>Mobile App Development</h2>
+        <p>
+            Join us in the exciting world of programming and turn your ideas into
+            reality. Unlock the world of endless possibilities - learn to code and
+            shape the digital future with us.
+        </p>
+        <div class="buttons">
+            <a href="#" class="join">Join Now</a>
+            <a href="#" class="learn">Learn More</a>
         </div>
     </div>
+    <div class="img">
+        <img src="https://www.codingnepalweb.com/demos/create-responsive-website-html-css/hero-bg.png" alt="hero image" />
+    </div>
 </section>
-
-<script>
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function() {
-        sidebar.classList.toggle("active");
-        if(sidebar.classList.contains("active")){
-            sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-        }else
-            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-</script>
-
 </body>
 </html>

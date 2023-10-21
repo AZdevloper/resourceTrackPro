@@ -9,7 +9,7 @@ import java.util.Optional;
 public class UserService {
 
     private UserRepositoryInterface userRepositoryInterface ;
-    private static UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
+    private  UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
   /*  public UserService(UserRepositoryInterface userRepositoryInterface) {
         this.userRepositoryInterface = userRepositoryInterface;
@@ -23,7 +23,7 @@ public class UserService {
 
     public User register(User user){
         userRepositoryImpl.save(user);
-        return null;
+        return user;
     }
 
     public boolean isValidUser( User user) {
@@ -35,17 +35,17 @@ public class UserService {
 
     public boolean validLoginDetails(User user) {
         System.out.println("Validating user: " + user);
-//      return true;
-        return userRepositoryImpl.findByUsername(user.getUsername()).isEmpty()
-                && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+      return true;
+//        return userRepositoryImpl.findByUsername(user.getUsername()).isEmpty()
+//                && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 
     public boolean login(String username,String password) {
-        System.out.println("Logging in user: " + username);
-        Optional<User> byUsername = userRepositoryImpl.findByUsername(username);
-        if (byUsername.isPresent() && byUsername.get().getPassword().equals(password)) {
+        System.out.println("Logging in user: " + username + " with password: " + password);
+        Optional<User> user = userRepositoryImpl.findByUsername(username);
+        user.ifPresent(value -> System.out.println(" user in data base password : " + value.getPassword()));
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
             return true;
-        }
-        return false;
+        }else return false;
     }
 }

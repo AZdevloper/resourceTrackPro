@@ -61,10 +61,12 @@ public class SingupServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
         if(userService.validLoginDetails(user) && password.equals(ConfirmPassword)) {
+            System.out.println("passed");
             userService.register(user);
             response.sendRedirect("login.jsp");
         } else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.sendRedirect("singup.jsp");
 //            response.sendRedirect("r.r");
         }
     }
