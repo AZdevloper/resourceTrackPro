@@ -3,6 +3,10 @@ package com.example.resourceTrackPro.services;
 import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.repositories.UserRepositoryImpl;
 import com.example.resourceTrackPro.repositories.UserRepositoryInterface;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
 
@@ -40,11 +44,15 @@ public class UserService {
 //                && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 
-    public boolean login(String username,String password) {
+    public boolean login(String username, String password, HttpServletRequest request) {
         System.out.println("Logging in user: " + username + " with password: " + password);
         Optional<User> user = userRepositoryImpl.findByUsername(username);
-        user.ifPresent(value -> System.out.println(" user in data base password : " + value.getPassword()));
+//        user.ifPresent(value -> System.out.println(" user in data base password : " + value.getPassword()));
         if (user.isPresent() && user.get().getPassword().equals(password)) {
+//            HttpServletRequest sess = new ServletRequest();
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user.get());
+
             return true;
         }else return false;
     }

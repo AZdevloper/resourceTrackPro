@@ -237,15 +237,18 @@
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <form action="../GetEquipment" method="post">
-                        <div class="custom-select developer" style="width:200px;">
-                            <select name="selectedCar" id="carSelect">
-                                <option value="0">Select car:</option>
-                                <option value="1">Audi</option>
-                                <option value="2">BMW</option>
-                            </select>
-                        </div>
+
+<%--                        <div class="custom-select developer" style="width:200px;">--%>
+<%--                            <select name="selectedEquipment" id="carSelect">--%>
+<%--                                <option value="0">Select car:</option>--%>
+<%--                                <option value="1">Audi</option>--%>
+<%--                                <option value="2">BMW</option>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
                         <p>date to return</p>
-                        <input type="datetime-local" name="dateTime" value="Submit">
+                        <input type="hidden" name="userId" value="1">
+                        <input type="hidden" name="equipmentId" value="1">
+                        <input type="datetime-local" name="dateTime" id="dateTimePicker" step="1">
                         <input type="submit"  value="Submit">
                     </form>
 
@@ -344,6 +347,11 @@
 </section>
 
 <script>
+
+        document.getElementById("dateTimePicker").addEventListener("change", function() {
+        var selectedDateTime = this.value.replace("T", " ");
+        this.value = selectedDateTime;
+    });
 
     // Add an event listener for the "focus" event on the window object
     window.addEventListener('focus', function () {

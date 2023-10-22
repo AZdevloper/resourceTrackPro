@@ -58,9 +58,10 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if(userService.login(username,password) ) {
+        if(userService.login(username,password,request) ) {
 
             session.setAttribute("name","joly");
+
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             response.sendRedirect("view/dashboard.jsp");
         } else {

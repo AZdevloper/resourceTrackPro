@@ -7,11 +7,11 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "helloServlet", value = "/createDatabaseAndEntities")
-public class HelloServlet extends HttpServlet {
+public class createDatabaseAndEntities extends HttpServlet {
     private String message;
 
     public void init() {
-        message = "Hello World!";
+        message = "database entities created successfully";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -23,6 +23,10 @@ public class HelloServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
+        out.println(" <a href=\"/resourceTrackPro_war_exploded/index.jsp\">\n" +
+                "                <i class='bx bx-message' ></i>\n" +
+                "                <span class=\"links_name\">go home</span>\n" +
+                "            </a>");
         out.println("</body></html>");
     }
 

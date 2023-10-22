@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
+//@Table(name = "User")
 @Access(AccessType.FIELD) //
 //@NoArgsConstructor
 public class User {

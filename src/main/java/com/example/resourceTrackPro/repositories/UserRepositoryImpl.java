@@ -34,7 +34,7 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
         return user;
     }
     public Optional<User> findByUsername(String username) {
-        System.out.println("Getting user by username: " + "abdelaziz");
+        System.out.println("Getting user by username: " + username);
        /* System.out.println("return in entity manager " + em.createQuery("select u from User u where u.id = :username", User.class)
                 .setParameter("username", 1)
                 .getResultStream().findAny());*/
@@ -49,7 +49,7 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
                 .getResultStream().findAny();
     }
 
-    static {
+     {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         em = entityManagerFactory.createEntityManager();
     }

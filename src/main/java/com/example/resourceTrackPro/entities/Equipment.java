@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 //import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Equipments")
+//@Table(name = "Equipments")
 //@NoArgsConstructor
 @Access(AccessType.FIELD)
 public class Equipment {

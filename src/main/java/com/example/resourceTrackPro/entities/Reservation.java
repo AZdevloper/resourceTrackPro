@@ -9,7 +9,7 @@ import java.util.Set;
 //import javax.persistence.Entity;
 
 @Entity
-@Table(name = "reservations")
+//@Table(name = "reservations")
 public class Reservation {
 
 
@@ -19,7 +19,7 @@ public class Reservation {
 
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne

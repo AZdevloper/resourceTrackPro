@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 //@Entity
-@Table(name = "Task")
+//@Table(name = "Task")
 @Access(AccessType.FIELD) //
 public class Task {
 

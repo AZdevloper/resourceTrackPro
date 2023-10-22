@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 //@Entity
-@Table(name = "Deppartments")
+//@Table(name = "Deppartments")
 @Access(AccessType.FIELD) //
 //@NoArgsConstructor
 public class Department {

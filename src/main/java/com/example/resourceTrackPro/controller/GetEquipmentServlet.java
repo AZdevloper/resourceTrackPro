@@ -1,5 +1,6 @@
 package com.example.resourceTrackPro.controller;
 
+import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.services.ReservationService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.RequestDispatcher;
@@ -41,18 +42,26 @@ public class GetEquipmentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userId = request.getParameter("userId");
-        String selectedEquipmentId = request.getParameter("selectedEquipment");
-        String endReservationDateStr = request.getParameter("endReservationDate");
+        // get userId from session
+        User user = (User)request.getSession().getAttribute("user");
+        String userId = String.valueOf(user.getId());
+
+        String selectedEquipmentId = request.getParameter("equipmentId");
+        String endReservationDateStr = request.getParameter("dateTime");
+
+
+        endReservationDateStr = endReservationDateStr.replace("T", " ");
+
+        System.out.println("api "+endReservationDateStr);
 
         Timestamp endReservationDate = Timestamp.valueOf(endReservationDateStr);
-
-        System.out.println(selectedEquipmentId + userId +endReservationDate);
+        System.out.println("value of  "+ endReservationDateStr);
+        System.out.println(  userId + endReservationDate);
 
         ReservationService  reservationService = new ReservationService();
         reservationService.add(userId,selectedEquipmentId,endReservationDate);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 
     }
 }
