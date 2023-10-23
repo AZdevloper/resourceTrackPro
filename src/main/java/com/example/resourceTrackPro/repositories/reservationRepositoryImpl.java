@@ -15,10 +15,10 @@ public class ReservationRepositoryImpl {
         em.getTransaction().begin();
         em.persist(reservation);
         em.getTransaction().commit();
-        em.close();
+
         return reservation;
     }
-    static {
+     static{
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         em = entityManagerFactory.createEntityManager();
     }

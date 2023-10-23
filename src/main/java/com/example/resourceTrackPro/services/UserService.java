@@ -8,7 +8,10 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserService {
 
@@ -45,6 +48,9 @@ public class UserService {
     }
 
     public boolean login(String username, String password, HttpServletRequest request) {
+   /*     String [] userIds = {"1","2"};
+        getUsers(userIds).forEach(user -> System.out.println("hello "+user.getUsername()));*/
+
         System.out.println("Logging in user: " + username + " with password: " + password);
         Optional<User> user = userRepositoryImpl.findByUsername(username);
 //        user.ifPresent(value -> System.out.println(" user in data base password : " + value.getPassword()));
@@ -56,4 +62,25 @@ public class UserService {
             return true;
         }else return false;
     }
+
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+    }
+    public List<User> getUsers(String[] userIds){
+//        return null;
+        Stream.of(userIds)
+                .map(userRepositoryImpl::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+               .map(user ->Stream.of(user.getUsername()))
+               .forEach(System.out::println);
+
+//                .collect(Collectors.toList());
+return null;
+
+    }
+
+
+
 }

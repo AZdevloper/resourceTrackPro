@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Website Homepage HTML and CSS | CodingNepal</title>
+    <title>resourceTrackPro</title>
     <link rel="stylesheet" href="style.css" />
     <style>
         /* Importing Google font - Open Sans */
@@ -213,7 +213,7 @@
 <body>
 <header class="header">
     <nav class="navbar">
-        <h2 class="logo"><a href="#">CodingNepal</a></h2>
+        <h2 class="logo"><a href="#">resourceTrackPro</a></h2>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" id="hamburger-btn">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -235,11 +235,11 @@
 </header>
 <section class="hero-section">
     <div class="hero">
-        <h2>Mobile App Development</h2>
+        <h2>Companies resources management </h2>
         <p>
-            Join us in the exciting world of programming and turn your ideas into
-            reality. Unlock the world of endless possibilities - learn to code and
-            shape the digital future with us.
+            Managing resources in a company can be challenging and complex.
+            That’s why you need ResourceTrackPro,
+            a powerful tool that simplifies and streamlines your resource management process.
         </p>
         <div class="buttons">
             <a href="#" class="join">Join Now</a>

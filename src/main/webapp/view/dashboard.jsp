@@ -1,6 +1,7 @@
+<%@ page import="com.example.resourceTrackPro.entities.User" %>
 <%
     if (session.getAttribute("name") == null){
-        System.out.println("its null");
+        System.out.println("You are not loged in ?");
         response.sendRedirect("../login.jsp");
     }
 %>
@@ -24,6 +25,14 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
     <style>
+        input[type="datetime-local"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 200px;
+            margin: 0.5rem;
+        }
         /* The container must be positioned relative: */
         .custom-select {
             position: relative;
@@ -93,7 +102,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bxl-c-plus-plus'></i>
-        <span class="logo_name">CodingLab</span>
+        <span class="logo_name">ResourceTrackPro</span>
     </div>
     <ul class="nav-links">
         <li>
@@ -102,58 +111,58 @@
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-box' ></i>
-                <span class="links_name">Product</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-list-ul' ></i>
-                <span class="links_name">Order list</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Analytics</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-coin-stack' ></i>
-                <span class="links_name">Stock</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-book-alt' ></i>
-                <span class="links_name">Total order</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Team</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-message' ></i>
-                <span class="links_name">Messages</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-heart' ></i>
-                <span class="links_name">Favrorites</span>
-            </a>
-        </li>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-box' ></i>--%>
+<%--                <span class="links_name">Product</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-list-ul' ></i>--%>
+<%--                <span class="links_name">Order list</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-pie-chart-alt-2' ></i>--%>
+<%--                <span class="links_name">Analytics</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-coin-stack' ></i>--%>
+<%--                <span class="links_name">Stock</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-book-alt' ></i>--%>
+<%--                <span class="links_name">Total order</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-user' ></i>--%>
+<%--                <span class="links_name">Team</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-message' ></i>--%>
+<%--                <span class="links_name">Messages</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="#">--%>
+<%--                <i class='bx bx-heart' ></i>--%>
+<%--                <span class="links_name">Favrorites</span>--%>
+<%--            </a>--%>
+<%--        </li>--%>
         <li>
             <a href="#">
                 <i class='bx bx-cog' ></i>
-                <span class="links_name">Setting</span>
+                <span class="links_name">Profile</span>
             </a>
         </li>
         <li class="log_out">
@@ -231,118 +240,111 @@
             </div>
         </div>
 <%--        cards--%>
-        <div class="card-list">
-            <div class="card" style="width: 18rem;">
+        <div class="card-list flex">
+            <div class="card m-2" style="width: 18rem;">
                 <img src="../images/chair.jpeg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">chair</h5>
                     <form action="../GetEquipment" method="post">
-
-<%--                        <div class="custom-select developer" style="width:200px;">--%>
-<%--                            <select name="selectedEquipment" id="carSelect">--%>
-<%--                                <option value="0">Select car:</option>--%>
-<%--                                <option value="1">Audi</option>--%>
-<%--                                <option value="2">BMW</option>--%>
-<%--                            </select>--%>
-<%--                        </div>--%>
-                        <p>date to return</p>
-                        <input type="hidden" name="userId" value="1">
+                        <p>la date de reteurne</p>
                         <input type="hidden" name="equipmentId" value="1">
-                        <input type="datetime-local" name="dateTime" id="dateTimePicker" step="1">
-                        <input type="submit"  value="Submit">
+                        <input type="datetime-local" name="dateTime" step="1" required>
+                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="réserver">
                     </form>
 
                 </div>
             </div>
-            <div  class="card-item">
-                <img src="../images/developer.png" alt="Card Image">
-                <span class="developer">Developer</span>
+            <div class="card m-2" style="width: 18rem;">
+                <img src="../images/img_1.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Office</h5>
+                    <form action="../GetEquipment" method="post">
+                        <p>la date de reteurne</p>
+                        <input type="hidden" name="equipmentId" value="2">
+                        <input type="datetime-local" name="dateTime" step="1" required>
+                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="réserver">
+                    </form>
 
-                <h3>A "developer" codes software and websites.</h3>
-                <div class="arrow">
-                    <i class="fas fa-arrow-right card-icon"></i>
                 </div>
             </div>
-            <a href="#" class="card-item">
-                <img src="images/designer.jpg" alt="Card Image">
-                <span class="designer">Designer</span>
-                <h3>A "designer" is a design expert.</h3>
-                <div class="arrow">
-                    <i class="fas fa-arrow-right card-icon"></i>
+            <div class="card m-2" style="width: 18rem;">
+                <img src="../images/img_2.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Laptop</h5>
+                    <form action="../GetEquipment" method="post">
+                        <p>la date de reteurne</p>
+                        <input type="hidden" name="equipmentId" value="3">
+                        <input type="datetime-local" name="dateTime"  step="1" required>
+                        <input type="submit"  class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="réserver">
+                    </form>
+
                 </div>
-            </a>
-            <a href="#" class="card-item">
-                <img src="images/editor.jpg" alt="Card Image">
-                <span class="editor">Editor</span>
-                <h3>An "editor" ensures content quality and accuracy.</h3>
-                <div class="arrow">
-                    <i class="fas fa-arrow-right card-icon"></i>
-                </div>
-            </a>
+            </div>
+
         </div>
 
-        <div class="sales-boxes">
-            <div class="top-sales box">
-                <div class="title">Top Seling Product</div>
-                <ul class="top-sales-details">
-                    <li>
-                        <a href="#">
-                            <img src="images/sunglasses.jpg" alt="">
-                            <span class="product">Vuitton Sunglasses</span>
-                        </a>
-                        <span class="price">$1107</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/jeans.jpg" alt="">
-                            <span class="product">Hourglass Jeans </span>
-                        </a>
-                        <span class="price">$1567</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/nike.jpg" alt="">
-                            <span class="product">Nike Sport Shoe</span>
-                        </a>
-                        <span class="price">$1234</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/scarves.jpg" alt="">
-                            <span class="product">Hermes Silk Scarves.</span>
-                        </a>
-                        <span class="price">$2312</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/blueBag.jpg" alt="">
-                            <span class="product">Succi Ladies Bag</span>
-                        </a>
-                        <span class="price">$1456</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/bag.jpg" alt="">
-                            <span class="product">Gucci Womens's Bags</span>
-                        </a>
-                        <span class="price">$2345</span>
-                    <li>
-                        <a href="#">
-                            <img src="images/addidas.jpg" alt="">
-                            <span class="product">Addidas Running Shoe</span>
-                        </a>
-                        <span class="price">$2345</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="images/shirt.jpg" alt="">
-                            <span class="product">Bilack Wear's Shirt</span>
-                        </a>
-                        <span class="price">$1245</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<%--        <div class="sales-boxes">--%>
+<%--            <div class="top-sales box">--%>
+<%--                <div class="title">Top Seling Product</div>--%>
+<%--                <ul class="top-sales-details">--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/sunglasses.jpg" alt="">--%>
+<%--                            <span class="product">Vuitton Sunglasses</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$1107</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/jeans.jpg" alt="">--%>
+<%--                            <span class="product">Hourglass Jeans </span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$1567</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/nike.jpg" alt="">--%>
+<%--                            <span class="product">Nike Sport Shoe</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$1234</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/scarves.jpg" alt="">--%>
+<%--                            <span class="product">Hermes Silk Scarves.</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$2312</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/blueBag.jpg" alt="">--%>
+<%--                            <span class="product">Succi Ladies Bag</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$1456</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/bag.jpg" alt="">--%>
+<%--                            <span class="product">Gucci Womens's Bags</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$2345</span>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/addidas.jpg" alt="">--%>
+<%--                            <span class="product">Addidas Running Shoe</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$2345</span>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">--%>
+<%--                            <img src="images/shirt.jpg" alt="">--%>
+<%--                            <span class="product">Bilack Wear's Shirt</span>--%>
+<%--                        </a>--%>
+<%--                        <span class="price">$1245</span>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </div>
 </section>
 

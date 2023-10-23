@@ -30,7 +30,7 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-        em.close();
+//        em.close();
         return user;
     }
     public Optional<User> findByUsername(String username) {
@@ -46,7 +46,7 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
     public Optional<User> findById(String userId) {
         return em.createQuery("select u from User u where u.id = :userId", User.class)
                 .setParameter("userId", userId)
-                .getResultStream().findAny();
+                .getResultStream().findFirst();
     }
 
      {

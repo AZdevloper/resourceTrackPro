@@ -48,18 +48,21 @@ public class GetEquipmentServlet extends HttpServlet {
 
         String selectedEquipmentId = request.getParameter("equipmentId");
         String endReservationDateStr = request.getParameter("dateTime");
-
+        System.out.println("get equipment "+endReservationDateStr);
 
         endReservationDateStr = endReservationDateStr.replace("T", " ");
-
-        System.out.println("api "+endReservationDateStr);
+        System.out.println("get equipment "+endReservationDateStr);
 
         Timestamp endReservationDate = Timestamp.valueOf(endReservationDateStr);
-        System.out.println("value of  "+ endReservationDateStr);
-        System.out.println(  userId + endReservationDate);
+        System.out.println("after converting  "+ endReservationDateStr);
+//        System.out.println(  userId + endReservationDate);
 
-        ReservationService  reservationService = new ReservationService();
-        reservationService.add(userId,selectedEquipmentId,endReservationDate);
+//        ReservationService  reservationService = new ReservationService();
+//        reservationService.add(userId,selectedEquipmentId,endReservationDate);
+        if (reservationService.add(userId,selectedEquipmentId,endReservationDate) !=null) {
+            System.out.println("success");
+            response.sendRedirect("view/dashboard.jsp");
+        }
 
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 
