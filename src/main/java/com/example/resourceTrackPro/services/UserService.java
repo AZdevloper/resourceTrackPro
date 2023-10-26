@@ -18,12 +18,6 @@ public class UserService {
     private UserRepositoryInterface userRepositoryInterface ;
     private  UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
-  /*  public UserService(UserRepositoryInterface userRepositoryInterface) {
-        this.userRepositoryInterface = userRepositoryInterface;
-    }*/
-   /* public UserService(UserRepositoryImpl userRepositoryImpl) {
-        this.userRepositoryImpl = userRepositoryImpl;
-    }*/
 
     public UserService() {
     }
@@ -42,9 +36,9 @@ public class UserService {
 
     public boolean validLoginDetails(User user) {
         System.out.println("Validating user: " + user);
-      return true;
-//        return userRepositoryImpl.findByUsername(user.getUsername()).isEmpty()
-//                && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+//      return true;
+        return userRepositoryImpl.findByUsername(user.getUsername()).isEmpty()
+                && user.getPassword() !=null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 
     public boolean login(String username, String password, HttpServletRequest request) {
@@ -64,19 +58,7 @@ public class UserService {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
     }
-/*    public List<User> getUsers(int[] userIds){
-//        return null;
-        Stream.of(userIds)
-                .map(userRepositoryImpl::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-               .map(user ->Stream.of(user.getUsername()))
-               .forEach(System.out::println);
 
-//                .collect(Collectors.toList());
-return null;
-
-    }*/
 
 
 
