@@ -48,14 +48,11 @@ public class UserService {
     }
 
     public boolean login(String username, String password, HttpServletRequest request) {
-   /*     String [] userIds = {"1","2"};
-        getUsers(userIds).forEach(user -> System.out.println("hello "+user.getUsername()));*/
 
         System.out.println("Logging in user: " + username + " with password: " + password);
         Optional<User> user = userRepositoryImpl.findByUsername(username);
-//        user.ifPresent(value -> System.out.println(" user in data base password : " + value.getPassword()));
+
         if (user.isPresent() && user.get().getPassword().equals(password)) {
-//            HttpServletRequest sess = new ServletRequest();
             HttpSession session = request.getSession();
             session.setAttribute("user", user.get());
 
@@ -67,7 +64,7 @@ public class UserService {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
     }
-    public List<User> getUsers(String[] userIds){
+/*    public List<User> getUsers(int[] userIds){
 //        return null;
         Stream.of(userIds)
                 .map(userRepositoryImpl::findById)
@@ -79,7 +76,7 @@ public class UserService {
 //                .collect(Collectors.toList());
 return null;
 
-    }
+    }*/
 
 
 

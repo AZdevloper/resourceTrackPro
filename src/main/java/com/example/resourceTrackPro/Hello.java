@@ -1,12 +1,11 @@
 package com.example.resourceTrackPro;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
 
 //@Entity
-public class Ghoulam {
+public class Hello {
 
     @Id
     @GeneratedValue
@@ -18,12 +17,12 @@ public class Ghoulam {
     private String email;
 
 
-    public Ghoulam(int id, String name, String email) {
+    public Hello(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
-    public Ghoulam() {
+    public Hello() {
 
     }
 

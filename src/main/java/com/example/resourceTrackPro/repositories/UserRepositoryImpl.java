@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements  UserRepositoryInterface {
                  .setParameter("username", username)
                  .getResultStream().findAny();
     }
-    public Optional<User> findById(String userId) {
+    public Optional<User> findById(int userId) {
         return em.createQuery("select u from User u where u.id = :userId", User.class)
                 .setParameter("userId", userId)
                 .getResultStream().findFirst();

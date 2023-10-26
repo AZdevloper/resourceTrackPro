@@ -7,8 +7,10 @@ import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.repositories.EquipmentRepositoryImpl;
 import com.example.resourceTrackPro.repositories.ReservationRepositoryImpl;
 import com.example.resourceTrackPro.repositories.UserRepositoryImpl;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 public class ReservationService {
@@ -19,21 +21,54 @@ public class ReservationService {
     public ReservationService() {
 
     }
-    public  Reservation add(String userId, String EquipmentId, Timestamp endReservationDate){
-       Optional<User> user = userRepository.findById(userId);
-       Optional<Equipment> equipment = equipmentRepository.findById(EquipmentId);
-       if (user.isPresent() && equipment.isPresent() && endReservationDate != null) {
+    public  Reservation add(int userId, int EquipmentId, Timestamp endReservationDate){
+        Reservation reservation = validReservation(userId, EquipmentId, endReservationDate);
+        if(reservation != null){
+            reservationRepository.save(validReservation(userId, EquipmentId, endReservationDate));
 
-           Reservation reservation = new Reservation( equipment.get(),user.get(), endReservationDate);
-           reservationRepository.save(reservation);
-           return reservation;
-       }
+        }
+        return reservation;
+    }
 
-         else {
+    public Reservation update(int userId, int EquipmentId, Timestamp endReservationDate){
+        Reservation reservation = validReservation(userId, EquipmentId, endReservationDate);
+        if(reservation != null){
+            reservationRepository.update(validReservation(userId, EquipmentId, endReservationDate));
+
+        }
+        return reservation;
+
+    }
+
+    public Reservation validReservation(int userId, int EquipmentId, Timestamp endReservationDate) {
+        Optional<User> user = userRepository.findById(userId);
+        Optional<Equipment> equipment = equipmentRepository.findById(EquipmentId);
+        if (user.isPresent() && equipment.isPresent() && endReservationDate != null) {
+
+            return new Reservation( equipment.get(),user.get(), endReservationDate);
+        }
+
+        else {
             // Handle the case where either the user or equipment is not found
             throw new IllegalArgumentException("User or Equipment not found");
         }
+    }
 
+    public boolean delete(int reservationId){
+        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+        if(reservation.isPresent()){
+            reservationRepository.delete(reservation.get());
+            return  true;
+        }
+        return false;
+
+    }
+    public List<Reservation> getReservationList(){
+      return   reservationRepository.findAll();
+
+    }
+    public List<Equipment> getAllReservedEquipment(HttpServletRequest request){
+        return   equipmentRepository.findAllReservedEquipment(request);
 
     }
 

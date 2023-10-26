@@ -1,7 +1,9 @@
 package com.example.resourceTrackPro.controller;
 
+import com.example.resourceTrackPro.entities.Equipment;
 import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.repositories.UserRepositoryImpl;
+import com.example.resourceTrackPro.services.ReservationService;
 import com.example.resourceTrackPro.services.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -16,11 +18,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class LoginServlet extends HttpServlet {
 
     private UserService userService;
+    private ReservationService reservationService;
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -31,6 +35,7 @@ public class LoginServlet extends HttpServlet {
         UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl(entityManagerFactory.createEntityManager());
         userService = new UserService(userRepositoryImpl);*/
         userService = new UserService();
+        reservationService = new ReservationService();
 
     }
 
@@ -51,6 +56,9 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    public  List<Equipment>  getReservedEquipments(HttpServletRequest request){
+        return reservationService.getAllReservedEquipment(request);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -61,9 +69,15 @@ public class LoginServlet extends HttpServlet {
         if(userService.login(username,password,request) ) {
 
             session.setAttribute("name","joly");
+            List<Equipment>   reservedEquipments = getReservedEquipments(request);
+            System.out.println("---->"+reservedEquipments);
 
+            request.setAttribute("reservedEquipments", reservedEquipments);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
-            response.sendRedirect("view/dashboard.jsp");
+//            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
+
+//            response.sendRedirect("view/dashboard.jsp");
         } else {
             System.out.println("failled to signin");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

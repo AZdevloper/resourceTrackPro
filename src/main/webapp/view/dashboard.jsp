@@ -1,4 +1,10 @@
-<%@ page import="com.example.resourceTrackPro.entities.User" %>
+<%--<%@ page import="com.example.resourceTrackPro.entities.Equipment" %>--%>
+<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+
+<%--<%@ page import="com.example.resourceTrackPro.entities.User" %>--%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.resourceTrackPro.entities.Equipment" %>
 <%
     if (session.getAttribute("name") == null){
         System.out.println("You are not loged in ?");
@@ -6,14 +12,14 @@
     }
 %>
 
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Dashboard </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,7 +172,7 @@
             </a>
         </li>
         <li class="log_out">
-            <a href="../login.jsp">
+            <a href="${pageContext.request.contextPath}/login.jsp">
                 <i class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>
@@ -187,12 +193,13 @@
         </div>
         <div class="profile-details">
             <img src="images/profile.jpg" alt="">
-            <span class="admin_name">Prem Shahi</span>
+            <span class="admin_name">abdelaziz</span>
             <i class='bx bx-chevron-down' ></i>
         </div>
     </nav>
 
     <div class="home-content m-2">
+<%--        statistic--%>
         <div class="overview-boxes">
             <div class="box">
                 <div class="right-side">
@@ -242,36 +249,35 @@
 <%--        cards--%>
         <div class="card-list flex">
             <div class="card m-2" style="width: 18rem;">
-                <img src="../images/chair.jpeg" class="card-img-top" alt="...">
+                <img src="${pageContext.request.contextPath}/images/chair.jpeg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">chair</h5>
-                    <form action="../GetEquipment" method="post">
-                        <p>la date de reteurne</p>
+                    <form action="${pageContext.request.contextPath}/GetEquipment" method="post">
+                        <p>la date de retourne :</p>
                         <input type="hidden" name="equipmentId" value="1">
                         <input type="datetime-local" name="dateTime" step="1" required>
                         <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="réserver">
                     </form>
-
                 </div>
             </div>
             <div class="card m-2" style="width: 18rem;">
-                <img src="../images/img_1.png" class="card-img-top" alt="...">
+                <img src="${pageContext.request.contextPath}/images/img_1.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Office</h5>
-                    <form action="../GetEquipment" method="post">
+                    <form action="${pageContext.request.contextPath}/GetEquipment" method="post">
                         <p>la date de reteurne</p>
                         <input type="hidden" name="equipmentId" value="2">
-                        <input type="datetime-local" name="dateTime" step="1" required>
+                        <input type="datetime-local" name="dateTime"  step="1" required>
                         <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="réserver">
                     </form>
 
                 </div>
             </div>
             <div class="card m-2" style="width: 18rem;">
-                <img src="../images/img_2.png" class="card-img-top" alt="...">
+                <img src="${pageContext.request.contextPath}/images/img_2.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Laptop</h5>
-                    <form action="../GetEquipment" method="post">
+                    <form action="${pageContext.request.contextPath}/GetEquipment" method="post">
                         <p>la date de reteurne</p>
                         <input type="hidden" name="equipmentId" value="3">
                         <input type="datetime-local" name="dateTime"  step="1" required>
@@ -280,71 +286,35 @@
 
                 </div>
             </div>
-
         </div>
+    <%--        reservation cards--%>
+        <div >
+            <h1>les equipment deja reservee </h1>
+            <%--<c:forEach items="${reservedEquipments}" var="equipment">
+                <li>${equipment.getName()}</li>
+            </c:forEach>--%>
 
-<%--        <div class="sales-boxes">--%>
-<%--            <div class="top-sales box">--%>
-<%--                <div class="title">Top Seling Product</div>--%>
-<%--                <ul class="top-sales-details">--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/sunglasses.jpg" alt="">--%>
-<%--                            <span class="product">Vuitton Sunglasses</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$1107</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/jeans.jpg" alt="">--%>
-<%--                            <span class="product">Hourglass Jeans </span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$1567</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/nike.jpg" alt="">--%>
-<%--                            <span class="product">Nike Sport Shoe</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$1234</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/scarves.jpg" alt="">--%>
-<%--                            <span class="product">Hermes Silk Scarves.</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$2312</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/blueBag.jpg" alt="">--%>
-<%--                            <span class="product">Succi Ladies Bag</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$1456</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/bag.jpg" alt="">--%>
-<%--                            <span class="product">Gucci Womens's Bags</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$2345</span>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/addidas.jpg" alt="">--%>
-<%--                            <span class="product">Addidas Running Shoe</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$2345</span>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="images/shirt.jpg" alt="">--%>
-<%--                            <span class="product">Bilack Wear's Shirt</span>--%>
-<%--                        </a>--%>
-<%--                        <span class="price">$1245</span>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+            <div class="card-list flex">
+                <%
+                    List<Equipment> reservedEquipments = (List<Equipment>) request.getAttribute("reservedEquipments");
+                    System.out.println("dashboard ----->"+ reservedEquipments);
+                    for (Equipment resEqui : reservedEquipments) {
+                %>
+                <div class="card m-2" style="width: 18rem;">
+                    <img src="${pageContext.request.contextPath}/images/chair.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><%resEqui.getName();%></h5>
+                        <form action="../GetEquipment" method="post">
+                            <p>la date de retourne :</p>
+                            <input type="hidden" name="equipmentId" value="<%resEqui.getId();%>">
+                            <input type="datetime-local" name="dateTime" step="1" value="" required>
+                            <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="réserver">
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
     </div>
 </section>
 
