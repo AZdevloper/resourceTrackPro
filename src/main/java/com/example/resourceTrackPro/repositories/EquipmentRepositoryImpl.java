@@ -6,6 +6,7 @@ import com.example.resourceTrackPro.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -38,11 +39,14 @@ public class EquipmentRepositoryImpl {
         return  em.createQuery("SELECT e FROM Equipment e", Equipment.class).getResultList();
     }
 
-    public List<Equipment> findAllReservedEquipment(HttpServletRequest request) {
-        User user = (User)request.getSession().getAttribute("user");
-        int userId = user.getId();
-        String jpql = "SELECT r.equipment FROM Reservation r WHERE r.user.id = :currentUserId";
-        return em.createQuery(jpql, Equipment.class).setParameter("currentUserId", userId).getResultList();
+    public List<Reservation> findAllReservedEquipment(HttpServletRequest request) {
+       User user = (User)request.getSession().getAttribute("user");
+
+       int userId = user.getId();
+        String jpql = "SELECT r FROM Reservation r JOIN FETCH r.equipment WHERE r.user.id = :currentUserId";
+        return em.createQuery(jpql, Reservation.class)
+                .setParameter("currentUserId", userId)
+                .getResultList();
 
     }
     static {

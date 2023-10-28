@@ -1,6 +1,7 @@
 package com.example.resourceTrackPro.controller;
 
 import com.example.resourceTrackPro.entities.Equipment;
+import com.example.resourceTrackPro.entities.Reservation;
 import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.repositories.UserRepositoryImpl;
 import com.example.resourceTrackPro.services.ReservationService;
@@ -56,9 +57,9 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    public  List<Equipment>  getReservedEquipments(HttpServletRequest request){
-        return reservationService.getAllReservedEquipment(request);
-    }
+//    public  List<Reservation>  getReservedEquipments(HttpServletRequest request){
+//        return reservationService.getAllReservedEquipment(request);
+//    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -69,15 +70,15 @@ public class LoginServlet extends HttpServlet {
         if(userService.login(username,password,request) ) {
 
             session.setAttribute("name","joly");
-            List<Equipment>   reservedEquipments = getReservedEquipments(request);
-            System.out.println("---->"+reservedEquipments);
-
-            request.setAttribute("reservedEquipments", reservedEquipments);
+//            List<Reservation>   reservedEquipments = getReservedEquipments(request);
+//            System.out.println("---->"+reservedEquipments);
+//
+//            request.setAttribute("reservedEquipments", reservedEquipments);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
 //            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
-            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
+//            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
 
-//            response.sendRedirect("view/dashboard.jsp");
+            response.sendRedirect("view/dashboard.jsp");
         } else {
             System.out.println("failled to signin");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

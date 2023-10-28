@@ -41,43 +41,39 @@ public class GetEquipmentServlet extends HttpServlet {
     }
 
     public GetEquipmentServlet(ReservationService reservationService) {
+
         this.reservationService = reservationService;
     }
-    public  List<Equipment>  getReservedEquipments(HttpServletRequest request){
-        return reservationService.getAllReservedEquipment(request);
-    }
+//    public  List<Reservation>  getReservedEquipments(HttpServletRequest request){
+//        return reservationService.getAllReservedEquipment(request);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // get userId from session
-        GetEquipmentServlet getEquipmentServlet = initReservation(request, response);
-      /*  User user = (User)request.getSession().getAttribute("user");
-        String userId = String.valueOf(user.getId());
+        String method = request.getParameter("_method");
 
-        String selectedEquipmentId = request.getParameter("equipmentId");
-        String endReservationDateStr = request.getParameter("dateTime");
-        System.out.println("get equipment "+endReservationDateStr);
+        if (method != null && method.equals("DELETE")) {
 
-        endReservationDateStr = endReservationDateStr.replace("T", " ");
-        System.out.println("get equipment "+endReservationDateStr);
+            System.out.println("Delete her own inventory from database " );
+            int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 
-        Timestamp endReservationDate = Timestamp.valueOf(endReservationDateStr);
-        System.out.println("after converting  "+ endReservationDateStr);*/
-//        System.out.println(  userId + endReservationDate);
+            if (reservationService.delete(reservationId)) {
+                System.out.println("success");
+                response.sendRedirect("view/dashboard.jsp");
+            }
+        } else {
 
-//        ReservationService  reservationService = new ReservationService();
-//        reservationService.add(userId,selectedEquipmentId,endReservationDate);
-        if (reservationService.add(getEquipmentServlet.userId,getEquipmentServlet.selectedEquipmentId,getEquipmentServlet.endReservationDate) !=null) {
-            List<Equipment>   reservedEquipments = getReservedEquipments(request);
-            System.out.println("---->"+reservedEquipments);
+            GetEquipmentServlet getEquipmentServlet = initReservation(request, response);
 
-            request.setAttribute("reservedEquipments", reservedEquipments);
-            response.setStatus(HttpServletResponse.SC_ACCEPTED);
-//            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
-            request.getRequestDispatcher("view/dashboard.jsp").forward(request, response);
+            if (reservationService.add(getEquipmentServlet.userId,getEquipmentServlet.selectedEquipmentId,getEquipmentServlet.endReservationDate) !=null) {
+                System.out.println("passed");
+
+                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                response.sendRedirect("view/dashboard.jsp");
+            }
         }
 
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+
 
     }
 
@@ -112,6 +108,7 @@ public class GetEquipmentServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.doDelete(request, response);
+        System.out.println("Delete her own inventory from database " );
         int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 
         if (reservationService.delete(reservationId)) {
@@ -124,10 +121,10 @@ public class GetEquipmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
 
-        List<Equipment> reservedEquipments = reservationService.getAllReservedEquipment(req);
-        System.out.println("---->"+reservedEquipments.size());
-
-        req.setAttribute("reservedEquipments", reservedEquipments);
+//        List<Reservation> reservedEquipments = reservationService.getAllReservedEquipment(req);
+//        System.out.println("---->"+reservedEquipments.size());
+//
+//        req.setAttribute("reservedEquipments", reservedEquipments);
 
         req.getRequestDispatcher("/view/dashboard.jsp").forward(req, resp);
     }

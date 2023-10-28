@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 class ReservationServiceTest {
     static UserRepositoryImpl userRepository;
     static  ReservationService reservationService;
-    //    HttpServletRequest request;
+
     @BeforeAll
     public static void init() throws Exception{
         reservationService = new ReservationService();

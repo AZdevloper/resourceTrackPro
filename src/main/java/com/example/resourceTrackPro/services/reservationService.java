@@ -7,6 +7,7 @@ import com.example.resourceTrackPro.entities.User;
 import com.example.resourceTrackPro.repositories.EquipmentRepositoryImpl;
 import com.example.resourceTrackPro.repositories.ReservationRepositoryImpl;
 import com.example.resourceTrackPro.repositories.UserRepositoryImpl;
+import jakarta.persistence.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.sql.Timestamp;
@@ -61,13 +62,12 @@ public class ReservationService {
             return  true;
         }
         return false;
-
     }
     public List<Reservation> getReservationList(){
       return   reservationRepository.findAll();
 
     }
-    public List<Equipment> getAllReservedEquipment(HttpServletRequest request){
+    public List<Reservation> getAllReservedEquipment(HttpServletRequest request){
         return   equipmentRepository.findAllReservedEquipment(request);
 
     }

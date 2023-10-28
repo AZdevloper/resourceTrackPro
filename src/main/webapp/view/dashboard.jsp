@@ -5,16 +5,21 @@
 <%--<%@ page import="com.example.resourceTrackPro.entities.User" %>--%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.resourceTrackPro.entities.Equipment" %>
+<%@ page import="com.example.resourceTrackPro.services.ReservationService" %>
+<%@ page import="com.example.resourceTrackPro.entities.Reservation" %>
+<%@ page import="jakarta.persistence.Tuple" %>
 <%
     if (session.getAttribute("name") == null){
         System.out.println("You are not loged in ?");
         response.sendRedirect("../login.jsp");
     }
+    System.out.println("You loged in ?");
+    ReservationService reservationService = new ReservationService();
+    List<Reservation> reservedEquipments = reservationService.getAllReservedEquipment(request);
 %>
 
 
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -104,7 +109,6 @@
     </style>
 </head>
 <body id="DOMContentLoaded">
-
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bxl-c-plus-plus'></i>
@@ -117,54 +121,6 @@
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-box' ></i>--%>
-<%--                <span class="links_name">Product</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-list-ul' ></i>--%>
-<%--                <span class="links_name">Order list</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-pie-chart-alt-2' ></i>--%>
-<%--                <span class="links_name">Analytics</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-coin-stack' ></i>--%>
-<%--                <span class="links_name">Stock</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-book-alt' ></i>--%>
-<%--                <span class="links_name">Total order</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-user' ></i>--%>
-<%--                <span class="links_name">Team</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-message' ></i>--%>
-<%--                <span class="links_name">Messages</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="#">--%>
-<%--                <i class='bx bx-heart' ></i>--%>
-<%--                <span class="links_name">Favrorites</span>--%>
-<%--            </a>--%>
-<%--        </li>--%>
         <li>
             <a href="#">
                 <i class='bx bx-cog' ></i>
@@ -246,6 +202,9 @@
                 <i class='bx bxs-cart-download cart four' ></i>
             </div>
         </div>
+
+
+
 <%--        cards--%>
         <div class="card-list flex">
             <div class="card m-2" style="width: 18rem;">
@@ -256,7 +215,7 @@
                         <p>la date de retourne :</p>
                         <input type="hidden" name="equipmentId" value="1">
                         <input type="datetime-local" name="dateTime" step="1" required>
-                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="réserver">
+                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="reserver">
                     </form>
                 </div>
             </div>
@@ -268,7 +227,7 @@
                         <p>la date de reteurne</p>
                         <input type="hidden" name="equipmentId" value="2">
                         <input type="datetime-local" name="dateTime"  step="1" required>
-                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="réserver">
+                        <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="reserver">
                     </form>
 
                 </div>
@@ -281,13 +240,13 @@
                         <p>la date de reteurne</p>
                         <input type="hidden" name="equipmentId" value="3">
                         <input type="datetime-local" name="dateTime"  step="1" required>
-                        <input type="submit"  class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="réserver">
+                        <input type="submit"  class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" value="reserver">
                     </form>
 
                 </div>
             </div>
         </div>
-    <%--        reservation cards--%>
+    <%--    reservation cards--%>
         <div >
             <h1>les equipment deja reservee </h1>
             <%--<c:forEach items="${reservedEquipments}" var="equipment">
@@ -296,20 +255,29 @@
 
             <div class="card-list flex">
                 <%
-                    List<Equipment> reservedEquipments = (List<Equipment>) request.getAttribute("reservedEquipments");
-                    System.out.println("dashboard ----->"+ reservedEquipments);
-                    for (Equipment resEqui : reservedEquipments) {
+//                    List<Equipment> reservedEquipments = (List<Equipment>) request.getAttribute("reservedEquipments");
+//                    System.out.println("dashboard ----->"+ reservedEquipments.get(0));
+                    System.out.println("dashboard ----->"+ reservedEquipments.size());
+                    System.out.println("dashboard ----->"+ reservedEquipments.get(1));
+                    System.out.println("dashboard ----->"+ reservedEquipments.get(0));
+
+                    for (Reservation reservation : reservedEquipments) {
+//                        Equipment equipment = (Equipment) tuple.get("equipment");
+//                        Long rId = (Long) tuple.get("rId");
                 %>
                 <div class="card m-2" style="width: 18rem;">
                     <img src="${pageContext.request.contextPath}/images/chair.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><%resEqui.getName();%></h5>
+                        <h5 class="card-title"><%=reservation.getEquipment().getName()%></h5>
                         <form action="../GetEquipment" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
                             <p>la date de retourne :</p>
-                            <input type="hidden" name="equipmentId" value="<%resEqui.getId();%>">
-                            <input type="datetime-local" name="dateTime" step="1" value="" required>
-                            <input type="submit" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"  value="réserver">
+<%--                            <input type="hidden" name="equipmentId" value="<%=reservation.getEquipment().getId()%>">--%>
+                            <input type="hidden" name="reservationId" value="<%=reservation.getId()%>">
+                            <input type="datetime-local" name="dateTime" step="1" value="" >
+                            <input type="submit" class="py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"  value="supprimer">
                         </form>
+
                     </div>
                 </div>
                 <% } %>
